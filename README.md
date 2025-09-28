@@ -183,6 +183,10 @@ docker exec redis-slave2 redis-cli info replication
 4. **備份策略**: 定期備份 Redis 資料
 5. **網絡隔離**: 使用專用網絡確保 Sentinel 間通信安全
 
+## 參考資料
+
+- [docker-compose-redis-sentinel](https://github.com/880831ian/docker-compose-redis-sentinel)
+
 ## 相關連結
 
 - [Redis Sentinel 官方文檔](https://redis.io/docs/manual/sentinel/)
