@@ -10,17 +10,17 @@ import (
 func getRedisServerInfo() []map[string]interface{} {
 	return []map[string]interface{}{
 		{
-			"host": "172.20.0.2",
+			"host": "172.19.0.2",
 			"port": 6379,
 			"role": "master",
 		},
 		{
-			"host": "172.20.0.3",
+			"host": "172.19.0.3",
 			"port": 6379,
 			"role": "slave1",
 		},
 		{
-			"host": "172.20.0.4",
+			"host": "172.19.0.7",
 			"port": 6379,
 			"role": "slave2",
 		},
