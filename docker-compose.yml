@@ -1,0 +1,49 @@
+services:
+  redis-master:
+    image: redis:8.2.1-bookworm
+    container_name: redis-master
+    volumes:
+      - redis_master_data:/data
+    ports:
+      - 6379:6379
+
+  redis-slave1:
+    image: redis:8.2.1-bookworm
+    container_name: redis-slave1
+    volumes:
+      - redis_slave1_data:/data
+    ports:
+      - 6380:6379
+    command: redis-server --slaveof redis-master 6379
+    depends_on:
+      - redis-master
+
+  redis-slave2:
+    image: redis:8.2.1-bookworm
+    container_name: redis-slave2
+    volumes:
+      - redis_slave2_data:/data
+    ports:
+      - 6381:6379
+    command: redis-server --slaveof redis-master 6379
+    depends_on:
+      - redis-master
+      - redis-slave1
+
+  go-server:
+    image: golang:latest
+    container_name: go-server
+    working_dir: /app
+    volumes:
+      - ./web:/app
+    command: go run main.go
+    ports:
+      - 8080:8080
+    depends_on:
+      - redis-master
+      - redis-slave1
+      - redis-slave2
+volumes:
+  redis_master_data:
+  redis_slave1_data:
+  redis_slave2_data:
